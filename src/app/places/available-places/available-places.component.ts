@@ -25,7 +25,6 @@ export class AvailablePlacesComponent implements OnInit {
     const subscription = this.placesService.loadAvailablePlaces()
       .subscribe({
         next: (places) => {
-          console.log(places);
           this.places.set(places);
         },
         error: (error: Error) => {
@@ -42,9 +41,7 @@ export class AvailablePlacesComponent implements OnInit {
   }
 
   onSelectPlace(selectedPlace: Place) {
-    const subscription = this.placesService.addPlaceToUserPlaces(selectedPlace).subscribe({
-      next: (resData) => console.log(resData)
-    });
+    const subscription = this.placesService.addPlaceToUserPlaces(selectedPlace).subscribe();
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
