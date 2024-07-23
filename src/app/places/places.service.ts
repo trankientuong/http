@@ -51,10 +51,9 @@ export class PlacesService {
   }
 
   removeUserPlace(place: Place) {
-    const prevPlaces = [...this.userPlaces()];
-    const selectedPlaceIndex = this.userPlaces().findIndex(p => p.id === place.id);
-    if (selectedPlaceIndex >= 0) {
-      this.userPlaces().splice(selectedPlaceIndex, 1);
+    const prevPlaces = this.userPlaces();
+    if (prevPlaces.some(p => p.id === place.id)) {
+      this.userPlaces.set(prevPlaces.filter(p => p.id !== place.id));
     }
 
     return this.httpClient.delete(`http://localhost:3000/user-places/${place.id}`).pipe(

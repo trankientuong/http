@@ -37,10 +37,8 @@ export class UserPlacesComponent implements OnInit {
     });
   }
 
-  onSelectPlace(place: Place) {
-    const subscription = this.placesService.removeUserPlace(place).subscribe({
-      next: (resData) => console.log(resData)
-    });
+  onRemovePlace(place: Place) {
+    const subscription = this.placesService.removeUserPlace(place).subscribe();
 
     this.destroyRef.onDestroy(() => {
       subscription.unsubscribe();
